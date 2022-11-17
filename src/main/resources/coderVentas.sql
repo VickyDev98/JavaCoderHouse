@@ -26,12 +26,12 @@ Total int,
 constraint Id_Venta primary key(IdVenta),
 constraint FK_Cliente foreign key(IdCliente) references clientes (IdCliente)
 );
-create TABLE productos_ventas(
-IdProducto_Venta int not null auto_increment,
+create TABLE detalle_ventas(
+IdDetalle_Venta int not null auto_increment,
 IdVenta int,
 IdProducto int,
 Cantidad_Producto int,
-constraint Id_Producto_Venta primary key(IdProducto_Venta),
+constraint Id_Producto_Venta primary key(IdDetalle_Venta),
 constraint FK_Producto foreign key(IdProducto) references productos (IdProducto),
 constraint FK_Venta foreign key(IdVenta) references ventas (IdVenta)
 );

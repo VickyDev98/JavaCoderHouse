@@ -22,7 +22,8 @@ insert into ventas (Fecha,IdCliente,Total) values
 
 
 
-insert into productos_ventas (IdVenta,IdProducto,Cantidad_Producto)values
+
+insert into detalle_ventas (IdVenta,IdProducto,Cantidad_Producto)values
 (1,1,1),
 (1,2,4),
 (2,4,2),

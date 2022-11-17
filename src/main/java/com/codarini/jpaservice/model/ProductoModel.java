@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class ProductoModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idProducto;
     @Column
     private String nombre;

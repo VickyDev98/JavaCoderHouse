@@ -6,13 +6,13 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "productos_ventas")
+@Table(name = "detalle_ventas")
 
 public class DetalleFacturaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "IdProducto_Venta")
-    private int idProducto_Venta;
+    @Column(name= "IdDetalle_Venta")
+    private int idDetalle_Venta;
 
     @ManyToOne
     @JoinColumn(name = "IdVenta")

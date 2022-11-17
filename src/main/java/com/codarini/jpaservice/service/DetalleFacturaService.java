@@ -26,8 +26,8 @@ public class DetalleFacturaService {
         return this.detalleFacturaRepository.findAll();
     }
 
-    public Optional<DetalleFacturaModel> findById(int idProducto_Venta){
-        return this.detalleFacturaRepository.findById((long) idProducto_Venta);
+    public Optional<DetalleFacturaModel> findById(int idDetalle_Venta){
+        return this.detalleFacturaRepository.findById(idDetalle_Venta);
     }
 
 
@@ -82,13 +82,13 @@ public class DetalleFacturaService {
         return detalleFacturaInsertada;
     }
 
-    public DetalleFacturaModel update (DetalleFacturaModel producto_venta , int id){
-        Optional<DetalleFacturaModel> producto_ventaBD = this.detalleFacturaRepository.findById((long)id);
+    public DetalleFacturaModel update (DetalleFacturaModel detalle_factura, int id){
+        Optional<DetalleFacturaModel> producto_ventaBD = this.detalleFacturaRepository.findById(id);
         if(producto_ventaBD.isPresent()){
             DetalleFacturaModel pv = producto_ventaBD.get();
-            pv.setCantidad(producto_venta.getCantidad());
-            pv.setIdProductoModel(producto_venta.getIdProductoModel());
-            pv.setIdVentaModel(producto_venta.getIdVentaModel());
+            pv.setCantidad(detalle_factura.getCantidad());
+            pv.setIdProductoModel(detalle_factura.getIdProductoModel());
+            pv.setIdVentaModel(detalle_factura.getIdVentaModel());
             return this.detalleFacturaRepository.save(pv);
         }else{
             return null;

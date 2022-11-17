@@ -36,16 +36,18 @@ public class ClienteService {
         return this.clienteRepository.save(nuevoCliente);
     }
 
-    public ClienteModel update (ClienteModel cliente , int id) throws ResourceNotFoundException {
+    public ClienteModel update (ClienteModel clienteNuevo , int id) throws ResourceNotFoundException {
         Optional<ClienteModel> clienteBD = this.clienteRepository.findById(id);
+        ClienteModel cliente = new ClienteModel();
         if(clienteBD.isPresent()){
-            ClienteModel c = clienteBD.get();
-            c.setNombre(cliente.getNombre());
-            c.setApellido(cliente.getApellido());
-            c.setDni(cliente.getDni());
-            return this.clienteRepository.save(c);
-        }else{
-            throw new ResourceNotFoundException("El cliente no existe");
-        }
+            cliente = clienteBD.get();
+            cliente.setNombre(clienteNuevo.getNombre());
+            cliente.setApellido(clienteNuevo.getApellido());
+            cliente.setDni(clienteNuevo.getDni());
+            return this.clienteRepository.save(cliente);
+        }//else{
+           // throw new ResourceNotFoundException("El cliente no existe");
+        //}
+        return this.clienteRepository.save(cliente);
     }
 }

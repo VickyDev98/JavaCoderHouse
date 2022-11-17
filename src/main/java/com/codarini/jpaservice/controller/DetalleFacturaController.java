@@ -1,6 +1,8 @@
 package com.codarini.jpaservice.controller;
 
 import com.codarini.jpaservice.model.DetalleFacturaModel;
+import com.codarini.jpaservice.model.ProductoModel;
+import com.codarini.jpaservice.model.VentaModel;
 import com.codarini.jpaservice.service.DetalleFacturaService;
 import com.codarini.jpaservice.service.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +25,18 @@ public class DetalleFacturaController {
         }
 
         @GetMapping("/EncontrarPorId")
-        public ResponseEntity<Object> findById(@RequestParam int idProducto_Venta){
-            return new ResponseEntity<Object>(this.detalleFacturaService.findById(idProducto_Venta), HttpStatus.OK);
+        public ResponseEntity<Object> findById(@RequestParam int idDetalle_Venta){
+            return new ResponseEntity<Object>(this.detalleFacturaService.findById(idDetalle_Venta), HttpStatus.OK);
         }
 /*
         @GetMapping("/EncontrarIdProducto")
-        public ResponseEntity<Object> findByIdProducto(@RequestParam ProductoModel idProducto){
-            return new ResponseEntity<Object>(this.producto_ventaService.findByIdProducto(idProducto), HttpStatus.OK);
+        public ResponseEntity<Object> findByIdProducto(@RequestParam ProductoModel productoModel){
+            return new ResponseEntity<Object>(this.detalleFacturaService.findByIdProducto(productoModel), HttpStatus.OK);
         }
 
         @GetMapping("/EncontrarIdVenta")
-        public ResponseEntity<Object> findByIdVenta(@RequestParam int idVenta){
-            return new ResponseEntity<Object>(this.producto_ventaService.findByIdVenta(idVenta),HttpStatus.OK);
+        public ResponseEntity<Object> findByIdVenta(@RequestBody VentaModel ventaModel){
+            return new ResponseEntity<Object>(this.detalleFacturaService.findByIdVenta(ventaModel),HttpStatus.OK);
         }
 */
         @GetMapping("/EncontrarPorCantidad")

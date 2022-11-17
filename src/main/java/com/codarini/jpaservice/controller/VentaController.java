@@ -2,9 +2,7 @@ package com.codarini.jpaservice.controller;
 
 
 import com.codarini.jpaservice.model.ClienteModel;
-import com.codarini.jpaservice.model.DetalleFacturaModel;
 import com.codarini.jpaservice.model.VentaModel;
-
 import com.codarini.jpaservice.service.ResourceNotFoundException;
 import com.codarini.jpaservice.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +45,8 @@ public class VentaController {
     }
 
     @PostMapping("/Crear")
-    public ResponseEntity<VentaModel> create(@RequestBody VentaModel venta, DetalleFacturaModel detalleFactura) throws ResourceNotFoundException {
-        return new ResponseEntity<>(this.ventaService.create(venta,detalleFactura), HttpStatus.OK);
+    public ResponseEntity<VentaModel> create(@RequestBody VentaModel venta) throws ResourceNotFoundException {
+        return new ResponseEntity<>(this.ventaService.create(venta), HttpStatus.OK);
     }
 
     @PutMapping("/Actualizar{id}")

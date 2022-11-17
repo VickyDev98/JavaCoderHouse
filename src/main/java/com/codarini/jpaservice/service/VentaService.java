@@ -47,27 +47,16 @@ public class VentaService {
 
     public List<VentaModel> findByTotal(int total){return  this.ventaRepository.findByTotal(total);}
 
-    public VentaModel create (VentaModel nuevaVenta, DetalleFacturaModel nuevoDetalleVenta) throws ResourceNotFoundException {
+    public VentaModel create (VentaModel nuevaVenta) throws ResourceNotFoundException {
         int idCliente = nuevaVenta.getIdClienteModel().getIdCliente();
         if(!clienteRepository.existsById(idCliente)){
             throw new ResourceNotFoundException("El cliente no existe");
-        }
-        int idProducto = nuevoDetalleVenta.getIdProductoModel().getIdProducto();
-        if((!productoRepository.existsById(idProducto))){
-            throw new ResourceNotFoundException("El producto no existe");
         }
 
         VentaModel ventaModel;
         ventaModel = ventaRepository.save(nuevaVenta);
         if(ObjectUtils.isEmpty(ventaModel)){
             throw new ResourceNotFoundException("La venta no se pudo insertar");
-        }
-
-        DetalleFacturaModel detalleFacturaModel;
-        detalleFacturaModel = detalleFacturaRepository.save(nuevoDetalleVenta);
-        if(ObjectUtils.isEmpty(detalleFacturaModel)){
-            ventaRepository.delete(ventaModel);
-            throw new ResourceNotFoundException("El detalle de venta no pudo ser insertado");
         }
 
         return ventaModel;

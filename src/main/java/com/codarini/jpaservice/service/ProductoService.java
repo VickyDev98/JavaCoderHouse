@@ -36,7 +36,7 @@ public class ProductoService {
 
     public ProductoModel update (ProductoModel producto , int id) throws ResourceNotFoundException {
         Optional<ProductoModel> productoBD = this.productoRepository.findById(id);
-        boolean ExceptionEnProducto;
+
         if(productoBD.isPresent()){
             ProductoModel p = productoBD.get();
             p.setNombre(producto.getNombre());
