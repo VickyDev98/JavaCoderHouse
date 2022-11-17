@@ -30,29 +30,40 @@ public class DetalleFacturaService {
         return this.detalleFacturaRepository.findById((long) idProducto_Venta);
     }
 
-    //public  List<Producto_VentaModel> findByIdProducto(int idProducto){ return  this.producto_ventaRepository.findByIdProducto(idProducto);}
-
-    //public List<Producto_VentaModel> findByIdVenta(int idVenta){return this.producto_ventaRepository.findByIdVenta(idVenta);}
 
     public List<DetalleFacturaModel> findByCantidad(int cantidad){return  this.detalleFacturaRepository.findByCantidad(cantidad);}
 
     public DetalleFacturaModel create (DetalleFacturaModel nuevoDetalleFactura) throws ResourceNotFoundException {
-        if(!ventaRepository.existsById(nuevoDetalleFactura.getIdVentaModel().getIdVenta())){
+
+        int cantidad =0;
+        double precio = 0;
+        Optional<VentaModel> ventaModelOptional = ventaRepository.findById(nuevoDetalleFactura.getIdVentaModel().getIdVenta());
+        VentaModel ventaModel = new VentaModel();
+        if(ventaModelOptional.isPresent()){
+            ventaModel = ventaModelOptional.get();
+            cantidad = nuevoDetalleFactura.getCantidad();
+        }else{
             throw new ResourceNotFoundException("");
         }
 
+
+
+
         Optional<ProductoModel> productoModelOptional = productoRepository.findById(nuevoDetalleFactura.getIdProductoModel().getIdProducto());
         ProductoModel productoModel = new ProductoModel();
+
         if(productoModelOptional.isPresent()){
 
             productoModel = productoModelOptional.get();
 
+            precio = productoModel.getPrecio();
             int stockRestante = productoModel.getStock();
             int stockDeducir = nuevoDetalleFactura.getCantidad();
 
             if(stockRestante >= stockDeducir){
                 productoModel.setStock(stockRestante - stockDeducir);
                 productoRepository.save(productoModel);
+                ventaModel.setTotal((int) (precio*cantidad));
             }else{
                 ventaRepository.deleteById(nuevoDetalleFactura.getIdVentaModel().getIdVenta());
                 throw new ResourceNotFoundException("");
@@ -61,7 +72,7 @@ public class DetalleFacturaService {
             ventaRepository.deleteById(nuevoDetalleFactura.getIdVentaModel().getIdVenta());
             throw new ResourceNotFoundException("");
         }
-        //Comento el codigo
+
         DetalleFacturaModel detalleFacturaInsertada = detalleFacturaRepository.save(nuevoDetalleFactura);
         if(ObjectUtils.isEmpty(detalleFacturaInsertada)){
             ventaRepository.deleteById(nuevoDetalleFactura.getIdVentaModel().getIdVenta());
