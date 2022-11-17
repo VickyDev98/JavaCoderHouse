@@ -61,7 +61,7 @@ public class DetalleFacturaService {
             ventaRepository.deleteById(nuevoDetalleFactura.getIdVentaModel().getIdVenta());
             throw new ResourceNotFoundException("");
         }
-
+        //Comento el codigo
         DetalleFacturaModel detalleFacturaInsertada = detalleFacturaRepository.save(nuevoDetalleFactura);
         if(ObjectUtils.isEmpty(detalleFacturaInsertada)){
             ventaRepository.deleteById(nuevoDetalleFactura.getIdVentaModel().getIdVenta());
